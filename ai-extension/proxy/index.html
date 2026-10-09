@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Proxy</title>
+</head>
+<body>
+  <p>AI Proxy is running.</p>
+  <script>
+    // Handle CORS preflight and POST requests via URL params
+    // Usage: fetch this page with ?msg=hello&key=YOUR_GROQ_KEY
+    // Returns JSON: { reply: "..." }
+
+    async function handleRequest() {
+      const params = new URLSearchParams(window.location.search);
+      const msg = params.get("msg");
+      const key = params.get("key");
+
+      if (!msg || !key) return;
+
+      try {
+        const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${key}`
+          },
+          body: JSON.stringify({
+            model: "llama3-8b-8192",
+            messages: [{ role: "user", content: msg }]
+          })
+        });
+
+        const data = await res.json();
+        const reply = data.choices?.[0]?.message?.content ?? "No response.";
+
+        // Write result to page so extension can read it
+        document.getElementById("result").textContent = JSON.stringify({ reply });
+      } catch (e) {
+        document.getElementById("result").textContent = JSON.stringify({ reply: "Error: " + e.message });
+      }
+    }
+
+    handleRequest();
+  </script>
+  <pre id="result"></pre>
+</body>
+</html>

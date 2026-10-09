@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css" />
+  <title>AI Assistant</title>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <span>🤖 AI Assistant</span>
+      <button id="clearBtn" title="Clear chat">↺</button>
+    </header>
+
+    <div id="messages"></div>
+
+    <div id="input-area">
+      <textarea id="userInput" placeholder="Ask anything..." rows="2"></textarea>
+      <button id="sendBtn">Send</button>
+    </div>
+
+    <div id="key-area">
+      <input type="password" id="apiKey" placeholder="Paste your Groq API key..." />
+      <button id="saveKey">Save</button>
+      <span id="keyStatus"></span>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

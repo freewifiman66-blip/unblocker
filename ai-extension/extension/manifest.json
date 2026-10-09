@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "AI Assistant",
+  "version": "1.0",
+  "description": "Your personal AI assistant in the browser.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "AI Assistant"
+  },
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://api.groq.com/*"
+  ]
+}
